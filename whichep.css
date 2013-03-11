@@ -1,0 +1,46 @@
+/* CSS declarations go here */
+h1 i {
+  font-weight: 100;
+  font-size: 20px;
+  color: #999;
+}
+h1 span {
+  font-size: 50px;
+}
+table {
+  border: 1px solid #dddddd;
+  border-collapse: separate;
+  border-left: 0;
+  border-radius: 4px;
+  width: 100%;
+  display: table;
+}
+
+table th {
+  border-top: 0;
+  border-left: 1px solid #dddddd;
+  font-weight: bold;
+  padding: 8px;
+  line-height: 20px;
+  text-align: left;
+}
+
+table tr {
+  display: table-row;
+}
+
+table tr td {
+  padding: 8px;
+  line-height: 20px;
+  text-align: left;
+  vertical-align: top;
+  border-top: 1px solid #dddddd;
+  border-left: 1px solid #dddddd;
+}
+
+hr {
+  border-top: 1px solid #eeeeee;
+  border-bottom: 1px solid #ffffff;
+  margin: 20px 0;
+  color: #333333;
+}
