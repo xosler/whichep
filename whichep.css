@@ -4,6 +4,11 @@ h1 i {
   font-size: 20px;
   color: #999;
 }
+
 h1 span {
   font-size: 50px;
+}
+
+div.login {
+  padding: 15px 0;
 }

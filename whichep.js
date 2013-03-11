@@ -1,4 +1,5 @@
 Series = new Meteor.Collection("series");
+Users = Meteor.users;
 
 if (Meteor.isClient) {
   Template.series.series = function() {
