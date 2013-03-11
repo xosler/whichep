@@ -3,28 +3,39 @@
 </head>
 
 <body>
-  <h1><i>in </i><span>which EP</span><i> did I stop?</i></h1>
-  <hr>
-  {{> new_serie}}
-  <hr>
-  {{> series}}
+  <div class="container">
+    <div class="span12">
+      <h1><i>in </i><span>which EP</span><i> did I stop?</i></h1>
+    </div>
+    <div class="row">
+      <div class="span12">
+        {{> new_serie}}
+      </div>
+    </div>
+    <div class="row">
+      <div class="span12">
+        {{> series}}
+      </div>
+    </div>
+  </div>
 </body>
 
 <template name="new_serie">
-  <div class="new_serie">
-    <input id="new_serie_name" />
+  <div class="new_serie input-append">
+    <input type="text" id="new_serie_name" placeholder="Insert a new Serie..." />
     <input type="button" class="btn add" value="Add Serie" />
   </div>
 </template>
 
 <template name="series">
   <div class="series">
-    <table>
+    <table class="table table-bordered table-hover">
       <thead>
         <tr>
-          <th>Name</th>
-          <th>Season</th>
-          <th>Ep</th>
+          <th class="span7">Name</th>
+          <th class="span2">Season</th>
+          <th class="span2">Ep</th>
+          <th class="span1"></th>
         </tr>
       </thead>
       <tbody>
@@ -43,14 +54,20 @@
     </td>
     <td>
       {{season}}
-      <button class="increase season" title="Increase Season">+</button>
+      <div class="btn-group">
+        <button class="increase season btn btn-mini" title="Increase Season">+</button>
+        <button class="decrease season btn btn-mini" title="Decrease Season">-</button>
+      </div>
     </td>
     <td>
       {{ep}}
-      <button class="increase ep" title="Increase EP">+</button>
+      <div class="btn-group">
+        <button class="increase ep btn btn-mini" title="Increase EP">+</button>
+        <button class="decrease ep btn btn-mini" title="Decrease EP">-</button>
+      </div>
     </td>
     <td>
-      <button class="delete" title="Delete this item">x</button>
+      <button class="delete btn btn-mini btn-danger" title="Delete this item">x</button>
     </td>
   </tr>
 </template>

@@ -14,8 +14,18 @@ if (Meteor.isClient) {
     'click button.increase.ep': function() {
       Series.update(this._id, {$inc: {ep: 1}});
     },
+    'click button.decrease.ep': function() {
+      if(this.ep > 0) {
+        Series.update(this._id, {$inc: {ep: -1}});
+      }
+    },
     'click button.increase.season': function() {
       Series.update(this._id, {$inc: {season: 1}, $set: {ep: 0}});
+    },
+    'click button.decrease.season': function() {
+      if(this.season > 0) {
+        Series.update(this._id, {$inc: {season: -1}});
+      }
     }
   });
 
