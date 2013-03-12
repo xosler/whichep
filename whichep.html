@@ -4,50 +4,73 @@
 
 <body>
   <div class="container">
-    <div class="span12">
-      <h1><i>in </i><span>which EP</span><i> did I stop?</i></h1>
-      <small>{{currentUser}}</small>
+    <div class="page-header">
+      <h1>
+        <i>in </i><span>which EP</span><i> did I stop?</i>
+      </h1>
+      <div>{{loginButtons}}</div>
     </div>
-    <div class="row">
-      <div class="span12 login">{{loginButtons}}</div>
-    </div>
-    <div class="row">
-      <div class="span12">
-        {{> new_serie}}
+    {{#if currentUser}}
+      <div class="row">
+        <div class="span12">
+          {{> new_serie}}
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="span12">
-        {{> series}}
+      <div class="row">
+        <div class="span12">
+          {{> series}}
+        </div>
       </div>
-    </div>
+    {{else}}
+      <h2>You need to sign in before continue!</h2>
+    {{/if}}
+    <footer class="footer">
+      <hr>
+      <p>
+        WhichEP is a simple app that I created to manage which is the last EP
+        I've watched.
+      </p>
+      <p>My friends kinda like it, so I publish it.</p>
+      <p>Tecnology used? Meteor =)</p>
+      <p>
+        <a href="http://caarlos0.github.com/about" title="About me">About me</a>
+      </p>
+    </footer>
   </div>
 </body>
 
 <template name="new_serie">
   <div class="new_serie input-append">
-    <input type="text" id="new_serie_name" placeholder="Insert a new Serie..." />
-    <input type="button" class="btn add" value="Add Serie" />
+    <input type="text" id="new_serie_name" class="span5"
+      placeholder="Insert a new Serie..." autofocus />
+    <input type="button" class="btn btn-success add" value="Add Serie"
+      title="Add this Serie" />
   </div>
 </template>
 
 <template name="series">
   <div class="series">
-    <table class="table table-bordered table-hover">
-      <thead>
-        <tr>
-          <th class="span7">Name</th>
-          <th class="span2">Season</th>
-          <th class="span2">Ep</th>
-          <th class="span1"></th>
-        </tr>
-      </thead>
-      <tbody>
-        {{#each series}}
-          {{> serie}}
-        {{/each}}
-      </tbody>
-    </table>
+    {{#if series}}
+      <table class="table table-bordered table-hover">
+        <thead>
+          <tr>
+            <th class="span7">Name</th>
+            <th class="span2">Season</th>
+            <th class="span2">Ep</th>
+            <th class="span1"></th>
+          </tr>
+        </thead>
+        <tbody>
+          {{#each series}}
+            {{> serie}}
+          {{/each}}
+        </tbody>
+      </table>
+    {{else}}
+      <h3>
+        You have no Series yet. <a href="#" class="add serie">Add some.</a>
+      </h3>
+    {{/if}}
   </div>
 </template>
 
@@ -59,19 +82,29 @@
     <td>
       {{season}}
       <div class="btn-group">
-        <button class="increase season btn btn-mini" title="Increase Season">+</button>
-        <button class="decrease season btn btn-mini" title="Decrease Season">-</button>
+        <button class="increase season btn btn-mini" title="Increase Season">
+          +
+        </button>
+        <button class="decrease season btn btn-mini" title="Decrease Season">
+          -
+        </button>
       </div>
     </td>
     <td>
       {{ep}}
       <div class="btn-group">
-        <button class="increase ep btn btn-mini" title="Increase EP">+</button>
-        <button class="decrease ep btn btn-mini" title="Decrease EP">-</button>
+        <button class="increase ep btn btn-mini" title="Increase EP">
+          +
+        </button>
+        <button class="decrease ep btn btn-mini" title="Decrease EP">
+          -
+        </button>
       </div>
     </td>
     <td>
-      <button class="delete btn btn-mini btn-danger" title="Delete this item">x</button>
+      <button class="delete btn btn-mini btn-danger" title="Delete this item">
+        x
+      </button>
     </td>
   </tr>
 </template>
