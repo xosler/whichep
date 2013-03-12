@@ -50,67 +50,33 @@
 
 <template name="series">
   <div class="series">
-    <table class="table table-bordered table-hover">
-      <thead>
-        <tr>
-          <th class="span7">Name</th>
-          <th class="span2">Season</th>
-          <th class="span2">Ep</th>
-          <th class="span1"></th>
-        </tr>
-      </thead>
-      <tbody>
-        {{#each series}}
-          {{> serie}}
-        {{else}}
-          <tr>
-            <td>
-              <h4>
-                You have no Series yet.
-                <a href="#" class="add serie">Add some.</a>
-              </h4>
-            </td>
-            <td>-</td>
-            <td>-</td>
-            <td>-</td>
-          </tr>
-        {{/each}}
-      </tbody>
-    </table>
+    {{#each series}}
+      {{> serie}}
+    {{else}}
+      <h4>
+        You have no Series yet.
+        <a href="#" class="add serie">Add some.</a>
+      </h4>
+    {{/each}}
   </div>
 </template>
 
 <template name="serie">
-  <tr class="serie">
-    <td>
-      {{name}}
-    </td>
-    <td>
-      {{season}}
-      <div class="btn-group">
-        <button class="increase season btn btn-mini" title="Increase Season">
-          +
-        </button>
-        <button class="decrease season btn btn-mini" title="Decrease Season">
-          -
-        </button>
+  <div class="serie">
+    <div class="row">
+      <div class="span1">
+        <img src="{{poster}}" class="img-rounded">
       </div>
-    </td>
-    <td>
-      {{ep}}
-      <div class="btn-group">
-        <button class="increase ep btn btn-mini" title="Increase EP">
-          +
-        </button>
-        <button class="decrease ep btn btn-mini" title="Decrease EP">
-          -
-        </button>
+      <div class="span11">
+        <h3>{{name}}</h3>
+        <span class="desc">Season</span>
+        <input type="number" min="0" value="{{season}}" class="small season" />
+        <span class="desc">Episode</span>
+        <input type="number" min="0" value="{{ep}}" class="small ep" />
+        <a class="delete" href="#" title="Delete this item">
+          delete
+        </a>
       </div>
-    </td>
-    <td>
-      <button class="delete btn btn-mini btn-danger" title="Delete this item">
-        x
-      </button>
-    </td>
-  </tr>
+    </div>
+  </div>
 </template>

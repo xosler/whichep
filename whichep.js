@@ -12,24 +12,18 @@ if (Meteor.isClient) {
         Series.remove(this);
       }
     },
-    'click button.increase.ep': function() {
-      Series.update(this._id, {$inc: {ep: 1}});
+    'change .season': function(event) {
+      Series.update(this._id, {$set: {season: event.target.value}});
     },
-    'click button.decrease.ep': function() {
-      if(this.ep > 0) {
-        Series.update(this._id, {$inc: {ep: -1}});
-      }
-    },
-    'click button.increase.season': function() {
-      Series.update(this._id, {$inc: {season: 1}, $set: {ep: 0}});
-    },
-    'click button.decrease.season': function() {
-      if(this.season > 0) {
-        Series.update(this._id, {$inc: {season: -1}});
-      }
+    'change .ep': function(event) {
+      Series.update(this._id, {$set: {ep: event.target.value}});
     },
     'click .add.serie': function() {
       $('#new_serie_name').focus();
+    },
+    'click .delete': function() {
+      if(confirm("Are you sure?"))
+        Series.remove(this);
     }
   });
 
@@ -47,14 +41,27 @@ if (Meteor.isClient) {
     if(name.value.replace(/ /g, '').length === 0) {
       return false;
     }
-    if(Series.insert({
-      owner: Meteor.userId(),
-      name: name.value,
-      season: 1,
-      ep: 0
-    })) {
-      name.value = "";
-    }
+    var url = 'http://imdbapi.org/?title=';
+    url += encodeURIComponent(name.value);
+    url += '&type=json&plot=simple&limit=1';
+    $.get(url).done(function(data) {
+      console.log(JSON.parse(data));
+      var obj = JSON.parse(data)[0];
+      var lastEp = {season: 0, ep: 0};
+      if(obj.episodes && obj.episodes.length > 0) {
+        lastEp = obj.episodes[0];
+      }
+      console.log(lastEp);
+      if(Series.insert({
+        owner: Meteor.userId(),
+        name: obj.title || name.value,
+        season: lastEp.season,
+        ep: lastEp.episode,
+        poster: obj.poster
+      })) {
+        name.value = "";
+      }
+    })
   }
 }
 
