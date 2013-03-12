@@ -35,7 +35,7 @@ span.desc {
   font-weight: 100;
 }
 
-.delete {
+.delete, .info {
   font-weight: 100;
   color: #999;
   padding-left: 5px;
@@ -44,4 +44,12 @@ span.desc {
 .serie {
   border-bottom: 1px solid #eee;
   padding: 10px 0;
+}
+
+img.img-rounded {
+  max-height: 150px;
+}
+
+i.desc {
+  font-weight: 100px;
 }

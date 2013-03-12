@@ -41,7 +41,7 @@
 
 <template name="new_serie">
   <div class="new_serie input-append">
-    <input type="text" id="new_serie_name" class="span5 typeahead"
+    <input type="text" id="new_serie_name" class="span5"
       placeholder="Insert a new Serie..." autofocus data-provide="typeahead"
       autocomplete="off" />
     <input type="button" class="btn btn-success add" value="Add Serie"
@@ -65,18 +65,19 @@
 <template name="serie">
   <div class="serie">
     <div class="row">
-      <div class="span1">
+      <div class="span2">
         <img src="{{poster}}" class="img-rounded">
       </div>
-      <div class="span11">
-        <h3>{{name}}</h3>
+      <div class="span10">
+        <h2>{{name}}</h2>
+        <i class="desc">{{description}}</i>
+        <br><br>
         <span class="desc">Season</span>
         <input type="number" min="0" value="{{season}}" class="small season" />
         <span class="desc">Episode</span>
         <input type="number" min="0" value="{{ep}}" class="small ep" />
-        <a class="delete" href="#" title="Delete this item">
-          delete
-        </a>
+        <a class="info" target="_blank" href="{{imdb_url}}">info</a>
+        <a class="delete" href="#" title="Delete this item">delete</a>
       </div>
     </div>
   </div>

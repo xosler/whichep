@@ -37,12 +37,12 @@ if (Meteor.isClient) {
   });
 
   Template.new_serie.rendered = function () {
-    $('.typeahead').typeahead({
-      minLength: 4,
-      source: function(query, typeahead) {
-        return typeahead(getTitles(query));
-      }
-    });
+    // $('.typeahead').typeahead({
+    //   minLength: 4,
+    //   source: function(query, typeahead) {
+    //     return typeahead(getTitles(query));
+    //   }
+    // });
   }
 
   function getTitles(query) {
@@ -62,15 +62,23 @@ if (Meteor.isClient) {
 
   function submit() {
     var name = document.getElementById("new_serie_name");
-    if(name.value.replace(/ /g, '').length === 0) {
+    var nameVal = name.value.toLowerCase();
+    if(nameVal.replace(/ /g, '').length === 0) {
       return false;
     }
     var url = 'http://imdbapi.org/?title=';
-    url += encodeURIComponent(name.value);
-    url += '&type=json&plot=simple&limit=1';
+    url += encodeURIComponent(nameVal);
+    url += '&type=json&plot=simple&limit=10';
     $.get(url).done(function(data) {
       console.log(JSON.parse(data));
-      var obj = JSON.parse(data)[0];
+      var obj = {episodes: []};
+      $.each(JSON.parse(data), function() {
+        console.log(JSON.stringify(this.title) + '!!!');
+        if(this.title && this.title.toLowerCase() === nameVal &&
+          this.episodes && this.episodes.length > obj.episodes.length) {
+          obj = this;
+        }
+      });
       var lastEp = {season: 0, ep: 0};
       if(obj.episodes && obj.episodes.length > 0) {
         lastEp = obj.episodes[0];
@@ -81,7 +89,9 @@ if (Meteor.isClient) {
         name: obj.title || name.value,
         season: lastEp.season,
         ep: lastEp.episode,
-        poster: obj.poster
+        poster: obj.poster,
+        description: obj.plot_simple || "",
+        imdb_url: obj.imdb_url || ""
       })) {
         name.value = "";
       }
