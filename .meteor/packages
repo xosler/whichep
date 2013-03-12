@@ -12,3 +12,5 @@ accounts-ui
 accounts-facebook
 accounts-twitter
 accounts-google
+accounts-password
+accounts-github

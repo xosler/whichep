@@ -44,6 +44,9 @@ if (Meteor.isClient) {
 
   function submit() {
     var name = document.getElementById("new_serie_name");
+    if(name.value.replace(/ /g, '').length === 0) {
+      return false;
+    }
     if(Series.insert({
       owner: Meteor.userId(),
       name: name.value,
