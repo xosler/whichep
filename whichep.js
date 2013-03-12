@@ -27,6 +27,9 @@ if (Meteor.isClient) {
       if(this.season > 0) {
         Series.update(this._id, {$inc: {season: -1}});
       }
+    },
+    'click .add.serie': function() {
+      $('#new_serie_name').focus();
     }
   });
 

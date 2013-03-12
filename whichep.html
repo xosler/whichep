@@ -22,7 +22,7 @@
         </div>
       </div>
     {{else}}
-      <h2>You need to sign in before continue!</h2>
+      <h2 class="text-warning">You need to sign in before continue!</h2>
     {{/if}}
     <footer class="footer">
       <hr>
@@ -31,7 +31,7 @@
         I've watched.
       </p>
       <p>My friends kinda like it, so I publish it.</p>
-      <p>Tecnology used? Meteor =)</p>
+      <p>Tecnology used? Meteor with MongoDB =)</p>
       <p>
         <a href="http://caarlos0.github.com/about" title="About me">About me</a>
       </p>
@@ -50,27 +50,33 @@
 
 <template name="series">
   <div class="series">
-    {{#if series}}
-      <table class="table table-bordered table-hover">
-        <thead>
+    <table class="table table-bordered table-hover">
+      <thead>
+        <tr>
+          <th class="span7">Name</th>
+          <th class="span2">Season</th>
+          <th class="span2">Ep</th>
+          <th class="span1"></th>
+        </tr>
+      </thead>
+      <tbody>
+        {{#each series}}
+          {{> serie}}
+        {{else}}
           <tr>
-            <th class="span7">Name</th>
-            <th class="span2">Season</th>
-            <th class="span2">Ep</th>
-            <th class="span1"></th>
+            <td>
+              <h4>
+                You have no Series yet.
+                <a href="#" class="add serie">Add some.</a>
+              </h4>
+            </td>
+            <td>-</td>
+            <td>-</td>
+            <td>-</td>
           </tr>
-        </thead>
-        <tbody>
-          {{#each series}}
-            {{> serie}}
-          {{/each}}
-        </tbody>
-      </table>
-    {{else}}
-      <h3>
-        You have no Series yet. <a href="#" class="add serie">Add some.</a>
-      </h3>
-    {{/if}}
+        {{/each}}
+      </tbody>
+    </table>
   </div>
 </template>
 
