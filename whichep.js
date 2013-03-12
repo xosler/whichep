@@ -36,6 +36,30 @@ if (Meteor.isClient) {
     }
   });
 
+  Template.new_serie.rendered = function () {
+    $('.typeahead').typeahead({
+      minLength: 4,
+      source: function(query, typeahead) {
+        return typeahead(getTitles(query));
+      }
+    });
+  }
+
+  function getTitles(query) {
+    console.log(query);
+    return $.ajax({
+      url: 'http://imdbapi.org?title=' + query + '&limit=8',
+      datatype: "jsonp",
+      cache: true
+    }).done(function(data) {
+      var map = $.map(JSON.parse(data), function(obj) {
+        return obj.title;
+      });
+      console.log(map);
+      return map;
+    });
+  }
+
   function submit() {
     var name = document.getElementById("new_serie_name");
     if(name.value.replace(/ /g, '').length === 0) {

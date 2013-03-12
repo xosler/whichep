@@ -41,8 +41,9 @@
 
 <template name="new_serie">
   <div class="new_serie input-append">
-    <input type="text" id="new_serie_name" class="span5"
-      placeholder="Insert a new Serie..." autofocus />
+    <input type="text" id="new_serie_name" class="span5 typeahead"
+      placeholder="Insert a new Serie..." autofocus data-provide="typeahead"
+      autocomplete="off" />
     <input type="button" class="btn btn-success add" value="Add Serie"
       title="Add this Serie" />
   </div>
